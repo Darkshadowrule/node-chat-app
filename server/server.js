@@ -11,20 +11,20 @@ var server = http.createServer(app);
 var io=socketIO(server);
 app.use(express.static(publicPath))
 
-
 io.on('connection',(socket)=>{
   console.log("New user connected");
+
+  socket.on('createMessage',(message)=>{
+    console.log(message);
+    io.emit('newMessage',{
+      from:message.from,
+      text:message.text,
+      createdAt:new Date().getTime()
+    });
+  });
   socket.on('disconnect',()=>{
     console.log("User was disconnected");
   });
-  socket.on('createMessage',function(data){
-    console.log(data);
-  })
-  socket.emit('newMessage',{
-    text:"Hlo",
-    from:"xyz@gmail.com"
-  });
-
 });
 
 server.listen(port,()=>{
