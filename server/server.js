@@ -14,7 +14,7 @@ io.on('connection',(socket)=>{
   console.log("New user connected");
   socket.emit('newMessage',{
     from:'admin',
-    message:'Welcome to the chat app'
+    message:'Welcome to the chat application'
   });
   socket.broadcast.emit('newMessage',{
   from:"admin",
