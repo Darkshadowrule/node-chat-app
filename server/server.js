@@ -2,7 +2,7 @@ const express = require('express');
 const path = require('path');
 const http = require('http');
 const socketIO = require('socket.io');
-var {generateMessage}=require('./utils/message');
+var {generateMessage,generateLocationMessage}=require('./utils/message');
 publicPath=path.join(__dirname,'/../public')
 const port=process.env.PORT || 3000;
 var app=express();
@@ -21,7 +21,7 @@ io.on('connection',(socket)=>{
     callback("This is from server");
   });
   socket.on('createLocationMessage',(coords)=>{
-    io.emit('newMessage',generateMessage('Admin',`${coords.latitude},${coords.longitude}`))
+    io.emit('newLocationMessage',generateLocationMessage('Admin',coords.latitude,coords.longitude))
   })
   socket.on('disconnect',()=>{
     console.log("User was disconnected");
