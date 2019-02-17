@@ -12,7 +12,7 @@ var io=socketIO(server);
 app.use(express.static(publicPath))
 io.on('connection',(socket)=>{
   console.log("New user connected");
-  socket.emit('newMessage',generateMessage('Prajjwal',`Welcome to chat app`));
+  socket.emit('newMessage',generateMessage('Prajjwal',`Welcome to chat application`));
   socket.broadcast.emit('newMessage',generateMessage('Prajjwal','New user joined'));
 
   socket.on('createMessage',(message,callback)=>{
